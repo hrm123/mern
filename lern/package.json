@@ -1,0 +1,27 @@
+{
+  "name": "mern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "event.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node event.js",
+    "dev": "nodemon event.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrm123/mern.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hrm123/mern/issues"
+  },
+  "homepage": "https://github.com/hrm123/mern#readme",
+  "dependencies": {
+    "axios": "^1.12.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
