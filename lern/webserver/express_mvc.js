@@ -2,9 +2,14 @@ const express = require('express');
 const app = express();
 const PORT = 3010;
 
-const friendsController = require('./controllers/friends.controller');
-const messagesController = require('./controllers/messages.controller');
 
+
+
+const friendsRouter = require('./routes/friends.router');
+const messagesRouter = require('./routes/messages.router');
+
+app.use('/friends', friendsRouter);
+app.use('/messages', messagesRouter);
 
 app.use((req, res, next) => { // logs the time each request took in the Express server
     const start = Date.now(); // cuttent time in milliseconds since Jan 1, 1970
@@ -16,7 +21,7 @@ app.use((req, res, next) => { // logs the time each request took in the Express 
     */
     next();
     const duration = Date.now() - start;
-    console.log(`${req.method} ${req.url} - ${duration}ms`);
+    console.log(`${req.method} ${req.baseUrl}${req.url} - ${duration}ms`);
 });
 
 
@@ -27,15 +32,6 @@ app.use(bodyParser); // creates req.body object
 app.get('/', (req, res) => {
     res.status(200).type('text/plain').send('Hello, World!\n');
 });
-
-app.get('/friends', friendsController.getFriends);
-
-app.get('/friends/:friendId',friendsController.getFriend);
-
-app.post('/friends', friendsController.postFriend);
-
-app.get('/messages', messagesController.getMessages);
-app.post('/messages', messagesController.postMessages);
 
 
 app.listen(PORT, () => {
