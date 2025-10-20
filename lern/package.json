@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node webserver/expressbasic.js",
-    "dev": "nodemon webserver/expressbasic.js"
+    "dev": "nodemon webserver/express_mvc.js"
   },
   "repository": {
     "type": "git",
