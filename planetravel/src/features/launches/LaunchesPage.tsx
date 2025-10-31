@@ -6,15 +6,15 @@ import { addLaunch } from './launchesSlice';
 import type { Launch } from './launchesSlice';
 import { v4 as uuidv4 } from 'uuid';
 
-const HABITABLE_PLANETS = ['Planet1', 'Planet2', 'Planet3'];
 
 const LaunchesPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const launches = useSelector((state: RootState) => state.launches.launches);
+  const planets = useSelector((state: RootState) => state.planets?.planets ?? ['Planet1', 'Planet2', 'Planet3']);
 
   const [formData, setFormData] = useState({
-    planet: HABITABLE_PLANETS[0],
+    planet: planets[0] ?? 'Planet1',
     date: '',
     availableSeats: 0,
     price: 0,
@@ -28,7 +28,7 @@ const LaunchesPage = () => {
     };
     dispatch(addLaunch(newLaunch));
     setFormData({
-      planet: HABITABLE_PLANETS[0],
+      planet: planets[0] ?? 'Planet1',
       date: '',
       availableSeats: 0,
       price: 0,
@@ -53,7 +53,7 @@ const LaunchesPage = () => {
                 value={formData.planet}
                 onChange={(e) => setFormData({ ...formData, planet: e.target.value })}
               >
-                {HABITABLE_PLANETS.map((planet) => (
+                {planets.map((planet) => (
                   <option key={planet} value={planet}>{planet}</option>
                 ))}
               </select>

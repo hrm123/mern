@@ -9,6 +9,7 @@ const ReservationsPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const launches = useSelector((state: RootState) => state.launches.launches);
+  const reservations = useSelector((state: RootState) => state.reservations.reservations);
 
   const [formData, setFormData] = useState({
     launchId: launches.length > 0 ? launches[0].id : '',
@@ -65,6 +66,29 @@ const ReservationsPage = () => {
             <button className="btn btn-primary w-full" type="submit">{t('reservations.submit')}</button>
           </form>
         </div>
+      </div>
+      {/* Read-only list of existing reservations */}
+      <div className="mt-6">
+        <h2 className="text-2xl font-semibold mb-4">{t('Existing Reservations') ?? 'Existing Reservations'}</h2>
+        {reservations.length === 0 ? (
+          <p className="text-sm text-muted">No reservations yet.</p>
+        ) : (
+          <div className="space-y-4">
+            {reservations.map((r) => {
+              const launch = launches.find((l) => l.id === r.launchId);
+              return (
+                <div key={r.id} className="card bg-base-100 shadow">
+                  <div className="card-body">
+                    <h3 className="card-title">{r.customerName}</h3>
+                    <p className="text-sm">{launch ? `${launch.planet} - ${new Date(launch.date).toLocaleString()}` : 'Launch: Unknown'}</p>
+                    <p className="text-sm">Email: {r.email}</p>
+                    <p className="text-sm">Phone: {r.phone}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
