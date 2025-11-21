@@ -20,6 +20,10 @@ const Navbar = () => {
   return (
     <nav className="navbar bg-base-200">
       <div className="container mx-auto px-4">
+        <div className='ml-auto'>
+          <a href="/auth/google">sign on</a>
+          {/* <a href="/auth/logout">Sign out</a> */}
+        </div>
         <div className="flex-1">
           <Link to="/" className="text-xl font-bold">PlanetX</Link>
         </div>
