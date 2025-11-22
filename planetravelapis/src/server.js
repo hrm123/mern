@@ -28,14 +28,19 @@ const google_auth_strategy = new Strategy(
     verifyCallback
 )
 
-passport.serializeUser((user,done) => { // called when user session state is being saved to cookie to be sent back to the browser
+passport.serializeUser((user,done) => { // called when user session state is being saved to cookie to be sent back to the browser.. gets the 'google' profile object
 	console.log(`serializeUser called with ${user}`);
-	done(null,user); // first argument is errors, if any. second argument is the result
+	done(null,user.id); // first argument is errors, if any. second argument is the result
 })
 
-passport.deserializeUser((obj,done)=>{ // when cookie with session state is sent from web browser
-	console.log(`deserializeUser called with ${obj}`);
-	done(null,obj); // first argument is errors, if any. second argument is the value as exists in the cookie. The same will be set to req.session
+passport.deserializeUser((id,done)=>{ // when cookie with session state is sent from web browser
+	console.log(`deserializeUser called with ${id}`);
+	// User.findById(id).then(user => {
+		// done(null,user); // first argument is errors, if any. second argument is the value as exists in the cookie. The same will be set to req.session
+	// })
+
+	done(null,id);
+	
 });
 
 app.use(helmet()); // helmet protects endpoints against common code security issues
@@ -53,17 +58,11 @@ app.use(passport.session()) // check session is correct (use secret key). call d
 app.use(cors());
 app.use(morgan('combined'));
 app.use(express.json());
- 
-
 
 passport.use('google', google_auth_strategy);
 
-
-
-
-
 function verifyCallback(acccessToken, refreshToken, profile, done) {
-	console.log(`Google profile:${profile.name}`);
+	console.log(`Google profile:${profile}`);
 	done(null, profile); //passport now knows this user is now signed in - accessToken will get the user password for the password based authentication.. where you need to verify the password (?)
 }
 
@@ -88,7 +87,8 @@ app.use((req,res,next) => {
 //to authenticate only certain endpoints, we add middleware to only those endpoints
 
 function checkLoggedIn(req,res,next)  {
-	const isLoggedIn = true; // TODO
+	console.log('current user is:', req.user); // we are just storing google user profile ID here ti minimize cookie size
+	const isLoggedIn = req.user;
 	if(!isLoggedIn) {
 		return res.status(401).json({
 			error: "not logged in"
@@ -115,7 +115,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //logout end point for all providers
 app.get('/auth/logout', (req,res) => {
-    
+    req.logout(); // function exposed by passport. This will clear session cookies etc. and remove req.user property.
+	return res.redirect('/');
 });
 
 app.get('/', (req,res) => {

@@ -1,0 +1,20 @@
+{
+    "name": "planetravel",
+    "version" : "1.0.0",
+    "description":"",
+    "main":"index.js",
+     "scripts": {
+        "install-server": "npm install --prefix planetravelapis",
+        "install-client": "npm install --prefix planetravel",
+        "install": "npm run install-server && npm run install-client",
+        "server": "npm run watch --prefix planetravelapis",
+        "client": "npm start --prefix planetravel",
+        "watch": "npm run server & npm run client",
+        "deploy": "npm run build --prefix planetravel && npm start --prefix planetravelapis",
+        "deploy-cluster": "npm run build --prefix planetravel && npm run cluster --prefix planetravelapis",
+        "test": "npm test --prefix planetravelapis && npm test --prefix planetravel"
+    },
+    "keywords": [],
+    "author": "",
+    "dependencies": {}
+}
