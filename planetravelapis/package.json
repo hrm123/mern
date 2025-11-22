@@ -4,9 +4,11 @@
   "description": "Plane travel API server",
   "main": "src/server.js",
   "scripts": {
+    "test": "jest --detectOpenHandles",
+    "test-watch": "jest --watch",
+    "watch": "nodemon src/server.js",
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
-    "test": "jest --runInBand"
+    "cluster": "pm2 start src/server.js -i max"
   },
   "dependencies": {
     "cookie-session": "^2.1.1",
