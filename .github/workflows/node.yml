@@ -6,11 +6,11 @@ on:
     branches: [planetravel]
 jobs:
   build:
-  env:
-    CI: true
+    env:
+      CI: true
     strategy:
       matrix: 
-        node-version:['16.x','14.x','20.x']
+        node-version:[16.x,14.x,20.x]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
