@@ -13,9 +13,8 @@
         "watchwin": "start cmd /k \"npm run server\" && npm run client",
         "deploy": "npm run buildv --prefix planetravel && npm start --prefix planetravelapis",
         "deploy-cluster": "npm run buildv --prefix planetravel && npm run cluster --prefix planetravelapis",
-        "test": "npm test --prefix planetravelapis && npm test --prefix planetravel"
+        "test": "npm test --prefix planetravelapis && npm run testv --prefix planetravel"
     },
     "keywords": [],
-    "author": "",
-    "devDependencies": {}
+    "author": ""
 }
