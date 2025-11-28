@@ -153,4 +153,8 @@ router.use('/', graphqlHTTP({
 	graphiql: true
 }));
 
-module.exports = router;
+module.exports = {
+	router,
+	query1,
+	query1Result
+};
