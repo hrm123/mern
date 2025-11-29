@@ -2,9 +2,9 @@ const { makeExecutableSchema } = require('@graphql-tools/schema');
 const { loadFilesSync } = require('@graphql-tools/load-files');
 const { mergeTypeDefs } = require('@graphql-tools/merge');
 const path = require('path');
-const productsModel = require('../products/products.model');
-const ordersModel = require('../orders/orders.model');
-const customersModel = require('../customers/customers.model');
+const productsModelHardcoded = require('../products/products.model');
+const ordersModelHardcoded = require('../orders/orders.model');
+const customersModelHardcoded = require('../customers/customers.model');
 
 const loadedTypes = loadFilesSync(path.join(__dirname, '..'), {
 	extensions: ['graphql'],
@@ -12,60 +12,29 @@ const loadedTypes = loadFilesSync(path.join(__dirname, '..'), {
 
 const typeDefinitions = mergeTypeDefs(loadedTypes);
 
-const query1 = `
-{
-  orders {
-    subtotal
-    items{
-      quantity
-      product { 
-        id
-        price
-        reviews {
-          comment
-          rating
-        }
-      }
-    }
-  }
-}
-`;
-const query1Result = `
-{
-  "data": {
-    "orders": [
-      {
-        "subtotal": 888.88,
-        "items": [
-          {
-            "quantity": 2,
-            "product": {
-              "id": "1",
-              "price": 42.12,
-              "reviews": null
-            }
-          }
-        ]
-      }
-    ]
-  }
-}`;
-
+// resolver functions get following arguments - (parent, args, context, info)
+// parent is the root object,  args is additional arguments (authentication etc), 
+// context is shared object across resolvers, info is query related info
 const resolvers = {
 	Query: {
-		products: () => productsModel,
-		orders: () => ordersModel,
-		customers: () => customersModel
+		products: async (parent, args, context, info) => {
+			console.log({ parent, args, context, info });
+			if (!parent) {
+				return await Promise.resolve(context.rootValue.products);
+			}
+
+			return await Promise.resolve(parent.products);
+		},
+		orders: () => ordersModelHardcoded,
+		customers: () => customersModelHardcoded
 	}
 };
 
 const schema = makeExecutableSchema({
 	typeDefs: typeDefinitions,
-	resolvers,
+	resolvers
 });
 
 module.exports = {
 	schema,
-	query1,
-	query1Result
 };

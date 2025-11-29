@@ -14,6 +14,9 @@ const app = express();
 const path = require('path');
 const cookieSession = require('cookie-session')
 require('dotenv').config();
+const productsModelHardcoded = require('./products/products.model');
+const ordersModelHardcoded = require('./orders/orders.model');
+const customersModelHardcoded = require('./customers/customers.model');
 
 const AUTH_OPTIONS =
 {
@@ -82,7 +85,17 @@ const server = new ApolloServer({
 });
 
 server.start().then(() => {
-	app.use('/graphql', cors(), express.json(), expressMiddleware(server));
+	app.use('/graphql', cors(), express.json(), expressMiddleware(server, {
+		context: async ({ req }) => {
+			return {
+				rootValue: {
+					products: productsModelHardcoded,
+					orders: ordersModelHardcoded,
+					customers: customersModelHardcoded
+				}
+			};
+		},
+	}));
 });
 
 app.use(cookieSession({
