@@ -4,7 +4,9 @@ const morgan = require('morgan');
 const launchesRouter = require('./routes/launches');
 const planetsRouter = require('./routes/planets');
 const customersRouter = require('./routes/customers');
-const { router: graphqlRouter } = require('./routes/graphql');
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@apollo/server/express4');
+const { schema } = require('./routes/graphql');
 const { default: helmet } = require('helmet');
 const passport = require('passport');
 const { Strategy } = require('passport-google-oauth20')
@@ -74,7 +76,13 @@ if (process.env.NODE_ENV === 'production') {
 	}));
 }
 
-app.use('/graphql', graphqlRouter);
+const server = new ApolloServer({
+	schema
+});
+
+server.start().then(() => {
+	app.use('/graphql', cors(), express.json(), expressMiddleware(server));
+});
 
 app.use(cookieSession({
 	name: 'planetravel_session',
