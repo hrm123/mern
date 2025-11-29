@@ -6,7 +6,7 @@ const planetsRouter = require('./routes/planets');
 const customersRouter = require('./routes/customers');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
-const { schema } = require('./routes/graphql');
+const graphqlDetails = require('./routes/graphql');
 const { default: helmet } = require('helmet');
 const passport = require('passport');
 const { Strategy } = require('passport-google-oauth20')
@@ -67,17 +67,18 @@ if (process.env.NODE_ENV === 'production') {
 		contentSecurityPolicy: {
 			directives: {
 				// Allows the GraphQL Playground to load inline scripts and styles
-				'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.jsdelivr.net"],
+				'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.jsdelivr.net", "https://embeddable-sandbox.cdn.apollographql.com"],
 				'style-src': ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
-				'img-src': ["'self'", "data:", "https://cdn.jsdelivr.net"],
-				'connect-src': ["'self'", 'https://your-api-domain.tld'],
+				'img-src': ["'self'", "data:", "https://cdn.jsdelivr.net", "https://apollo-server-landing-page.cdn.apollographql.com"],
+				'connect-src': ["'self'", 'https://your-api-domain.tld', "https://sandbox.embed.apollographql.com"],
+				'frame-src': ["'self'", "https://sandbox.embed.apollographql.com"],
 			},
 		},
 	}));
 }
 
 const server = new ApolloServer({
-	schema
+	schema: graphqlDetails.schema
 });
 
 server.start().then(() => {

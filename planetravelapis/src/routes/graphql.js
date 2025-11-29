@@ -1,40 +1,16 @@
 const { makeExecutableSchema } = require('@graphql-tools/schema');
+const { loadFilesSync } = require('@graphql-tools/load-files');
+const { mergeTypeDefs } = require('@graphql-tools/merge');
+const path = require('path');
+const productsModel = require('../products/products.model');
+const ordersModel = require('../orders/orders.model');
+const customersModel = require('../customers/customers.model');
 
-const typeDefs = `
-	type Query{
-		products : [Product],
-		orders: [Order],
-		customers: [Customer]
-	}
-	type Product{
-		id: ID!
-		description: String!
-		reviews: [Review]
-		price: Float!
-	}
-	type Review{
-		id: ID!
-		comment: String!
-		rating: Int!
-	}
-	type Order{
-		id: ID!
-		items: [OrderItem]
-		subtotal: Float!
-		customer: Customer!
-		orderDate: String!
-	}
-	type OrderItem{
-		product: Product!
-		quantity: Int!
-	}
-	type Customer{
-		id: ID!
-		name: String!
-		email: String!
-		orders: [Order]
-	}
-`;
+const loadedTypes = loadFilesSync(path.join(__dirname, '..'), {
+	extensions: ['graphql'],
+});
+
+const typeDefinitions = mergeTypeDefs(loadedTypes);
 
 const query1 = `
 {
@@ -77,71 +53,14 @@ const query1Result = `
 
 const resolvers = {
 	Query: {
-		products: () => {
-			return [
-				{
-					id: 1,
-					description: 'Red SHoe',
-					price: 42.12
-				}
-			]
-		},
-		orders: () => {
-			return [
-				{
-					id: 1,
-					subtotal: 888.88,
-					orderDate: '2022-01-01',
-					customer: {
-						id: 1,
-						name: 'John Doe',
-						email: 'john.doe@example.com',
-					},
-					items: [
-						{
-							product: {
-								id: 1,
-								description: 'Red SHoe',
-								rating: 4,
-								price: 42.12,
-								comment: 'Great Shoe'
-							},
-							quantity: 2,
-						}
-					]
-				}
-			]
-		},
-		customers: () => {
-			return [
-				{
-					id: 1,
-					name: 'John Doe',
-					email: 'john.doe@example.com',
-					orders: [
-						{
-							id: 1,
-							items: [
-								{
-									product: {
-										id: 1,
-										description: 'Red SHoe',
-										rating: 4,
-										quantity: 2,
-										comment: 'Great Shoe'
-									}
-								}
-							]
-						}
-					]
-				}
-			]
-		}
+		products: () => productsModel,
+		orders: () => ordersModel,
+		customers: () => customersModel
 	}
 };
 
 const schema = makeExecutableSchema({
-	typeDefs,
+	typeDefs: typeDefinitions,
 	resolvers,
 });
 
