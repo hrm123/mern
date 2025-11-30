@@ -14,9 +14,11 @@ const app = express();
 const path = require('path');
 const cookieSession = require('cookie-session')
 require('dotenv').config();
-const productsModelHardcoded = require('./products/products.model');
-const ordersModelHardcoded = require('./orders/orders.model');
-const customersModelHardcoded = require('./customers/customers.model');
+const productsModel = require('./products/products.model');
+const ordersModel = require('./orders/orders.model');
+const customersModel = require('./customers/customers.model');
+
+
 
 const AUTH_OPTIONS =
 {
@@ -89,9 +91,9 @@ server.start().then(() => {
 		context: async ({ req }) => {
 			return {
 				rootValue: {
-					products: productsModelHardcoded,
-					orders: ordersModelHardcoded,
-					customers: customersModelHardcoded
+					products: productsModel.getAllProducts(true),
+					orders: ordersModel.getAllOrders(true),
+					customers: customersModel.getAllCustomers(true)
 				}
 			};
 		},

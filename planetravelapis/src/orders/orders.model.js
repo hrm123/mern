@@ -1,4 +1,4 @@
-module.exports = [
+const orders = [
 				{
 					id: 1,
 					subtotal: 888.88,
@@ -22,3 +22,14 @@ module.exports = [
 					]
 				}
 			];
+
+function getAllOrders(test) {
+	if(test) {
+		return orders;
+	}
+	return orders; // TODO - fetch from actual databse in real scenario
+}
+
+module.exports = {
+	getAllOrders
+}

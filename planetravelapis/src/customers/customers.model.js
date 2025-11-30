@@ -1,4 +1,4 @@
-module.exports = [
+const customers = [
 				{
 					id: 1,
 					name: 'John Doe',
@@ -21,3 +21,13 @@ module.exports = [
 					]
 				}
 			];
+
+function getAllCustomers(test) {
+	if(test) {
+		return customers;
+	}
+	return customers; // eftch from database etc in real scenario
+}
+module.exports = {
+	getAllCustomers
+}
