@@ -7,17 +7,24 @@ module.exports = {
     Query: {
         products: () => {
             if(isProduction){
-                console.log('--------------- Fetching products --------------- ');
+                // console.log('--------------- Fetching products --------------- ');
                 return productsModel.getAllProducts();
             } else {
-                console.log('--------------- Fetching products in TEST mode --------------- ');
+                // console.log('--------------- Fetching products in TEST mode --------------- ');
                 return productsModel.getAllProducts(true);
             }
         },
         productsByPrice: (_, args) => { // firsta argument is parent is not being used so we use '_'
             const { minPrice, maxPrice } = args;
-            console.log(`--------------- Fetching products with price between ${minPrice} and ${maxPrice} --------------- `);
+            // console.log(`--------------- Fetching products with price between ${minPrice} and ${maxPrice} --------------- `);
             return productsModel.getProductsByPrice(minPrice, maxPrice, !isProduction);
+        }
+    },
+    Mutation: {
+        addProduct: (_, args) => {
+            const { description, price } = args;
+            // console.log(`--------------- Adding product ${description} with price ${price} --------------- `);
+            return productsModel.addProduct(description, price);
         }
     }
 }

@@ -16,12 +16,12 @@ app.use((req, res, next) => { // logs the time each request took in the Express 
     /*
     res.on('finish', () => {
         const duration = Date.now() - start;
-        console.log(`${req.method} ${req.url} - ${duration}ms`);
+        // console.log(`${req.method} ${req.url} - ${duration}ms`);
     });
     */
     next();
     const duration = Date.now() - start;
-    console.log(`${req.method} ${req.baseUrl}${req.url} - ${duration}ms`);
+    // console.log(`${req.method} ${req.baseUrl}${req.url} - ${duration}ms`);
 });
 
 
@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+    // console.log(`Server running at http://localhost:${PORT}`);
 }); 
 
 // To run the server, use the command: node webserver/expressbasic.js
@@ -45,6 +45,6 @@ app.listen(PORT, () => {
 
 // GET /friends/10 - 10ms, GET /friends - 6ms, GET /friends/0 - 1ms - the times are fluctuating though on each refresh
 
-//  request for success on post -  fetch('http://localhost:3010/friends', {method:'POST', body: JSON.stringify({name: 'newName'}), headers: { "Content-Type": "application/json"  },}).then((respons) => respons.json()).then((newfriend) => console.log(newfriend))
+//  request for success on post -  fetch('http://localhost:3010/friends', {method:'POST', body: JSON.stringify({name: 'newName'}), headers: { "Content-Type": "application/json"  },}).then((respons) => respons.json()).then((newfriend) => // console.log(newfriend))
 
-// request for error on post -  fetch('http://localhost:3010/friends', {method:'POST', body: JSON.stringify({nameOfFriend: 'newName'}), headers: { "Content-Type": "application/json"  },}).then((respons) => respons.json()).then((newfriend) => console.log(newfriend))
+// request for error on post -  fetch('http://localhost:3010/friends', {method:'POST', body: JSON.stringify({nameOfFriend: 'newName'}), headers: { "Content-Type": "application/json"  },}).then((respons) => respons.json()).then((newfriend) => // console.log(newfriend))

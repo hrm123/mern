@@ -14,6 +14,6 @@ function read(encryptedData){
     return encryptedData;
 }
 
-//console.log(module)
+//// console.log(module)
 
 module.exports = {readResponse: read };

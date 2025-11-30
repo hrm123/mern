@@ -11,7 +11,7 @@ const query1 = `
         id
         price
         reviews {
-          comment
+          note
           rating
         }
       }
@@ -88,7 +88,7 @@ const query2Response = `
 
 const query3 = `
 {
-    productsByPrice(minPrice: 10, maxPrice: 50){
+    productsByPrice(minPrice: 10, maxPrice: 40){
       id,
       description
     }
@@ -108,6 +108,72 @@ const query3Response = `
 }
 `;
 
+const query4 = `
+{
+  products {
+    id,
+    description,
+    reviews {
+      note,
+    }
+  }
+  reviews {
+    id,
+    note,
+    pid
+  }
+}
+`;
+
+const query4Response = `
+{
+  "data": {
+    "products": [
+      {
+        "id": "1",
+        "description": "Red SHoe",
+        "reviews": null
+      },
+      {
+        "id": "2",
+        "description": "Blue Jean",
+        "reviews": null
+      }
+    ],
+    "reviews": [
+      {
+        "id": "1",
+        "note": "Blue Jean are awesome",
+        "pid": "2"
+      },
+      {
+        "id": "2",
+        "note": "Red shoes are awesome",
+        "pid": "1"
+      }
+    ]
+  }
+}
+`;
+
+const mutation1 = `
+mutation AddProduct {
+  addProduct(
+    description:"GraphQL Distilled",
+    price:33.2
+  ){
+    description
+  }
+}`;
+
+const mutation1Response = `
+{
+  "data": {
+    "addProduct": {
+      "description": "GraphQL Distilled"
+    }
+  }
+}`;
 
 
 module.exports = {
@@ -116,5 +182,9 @@ module.exports = {
   query2,
   query2Response,
   query3,
-  query3Response
+  query3Response,
+  query4,
+  query4Response,
+  mutation1,
+  mutation1Response
 };

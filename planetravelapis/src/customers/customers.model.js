@@ -24,7 +24,7 @@ const customers = [
 
 function getAllCustomers(test) {
 	if(test) {
-		console.log('Getting all customers - test mode');
+		// console.log('Getting all customers - test mode');
 		return customers;
 	}
 	return null; // eftch from database etc in real scenario

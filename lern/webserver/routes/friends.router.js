@@ -9,17 +9,17 @@ friendsRouter.use((req, res, next) => { // logs the time each request took in th
     /*
     res.on('finish', () => {
         const duration = Date.now() - start;
-        console.log(`${req.method} ${req.url} - ${duration}ms`);
+        // console.log(`${req.method} ${req.url} - ${duration}ms`);
     });
     */
     next();
     const duration = Date.now() - start;
-    console.log(`${req.method} ${req.baseUrl}${req.url} - ${duration}ms`);
+    // console.log(`${req.method} ${req.baseUrl}${req.url} - ${duration}ms`);
 });
 
 friendsRouter.use(express.json());
 friendsRouter.use((req, res, next) => { // logs the time each request took in the Express server
-    console.log(req.ip)
+    // console.log(req.ip)
     next();
   
 });

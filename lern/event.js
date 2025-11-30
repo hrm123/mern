@@ -11,19 +11,19 @@ const celebrity = new CelebrityEventEmitter();
 
 //subscriber to celebrity
 celebrity.on('appearance', (event) => {
-    console.log(`Celebrity is making unexpected appearance at ${event.location} on ${event.date}`);
+    // console.log(`Celebrity is making unexpected appearance at ${event.location} on ${event.date}`);
 });
 celebrity.on('scandal', (event) => {
-    console.log(`Breaking News! Celebrity involved in a scandal: ${event.details}`);
+    // console.log(`Breaking News! Celebrity involved in a scandal: ${event.details}`);
 });
 
 
 //another subscriber to celebrity
 celebrity.on('appearance', (event) => {
-    console.log(`You can see Celebrity at ${event.location} on ${event.date}`);
+    // console.log(`You can see Celebrity at ${event.location} on ${event.date}`);
 });
 celebrity.on('scandal', (event) => {
-    console.log(`Celebrity scandal: ${event.details}`);
+    // console.log(`Celebrity scandal: ${event.details}`);
 });
 
 celebrity.emit('appearance', { location: 'Hollywood', date: '2024-07-15' });

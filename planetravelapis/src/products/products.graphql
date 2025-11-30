@@ -5,6 +5,10 @@ type Query {
 }
 
 
+type Mutation {
+	addProduct(description: String!, price: Float!): Product
+}
+
 type Product {
 	id: ID!
 	description: String!
@@ -13,10 +17,5 @@ type Product {
 }
 
 
-type Review{
-	id: ID!
-	comment: String!
-	rating: Int!
-}
 	
 

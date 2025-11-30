@@ -1,0 +1,18 @@
+
+type Query {
+	reviews : [ Review ],
+	reviewsByProductID(pid: ID!): [Review]
+}
+
+type Mutation {
+	addReview(note: String!, pid: ID!): Product
+}
+
+type Review{
+	id: ID!
+	pid: ID!
+	note: String!
+	rating: Int!
+}
+	
+

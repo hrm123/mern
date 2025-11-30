@@ -17,7 +17,7 @@ function sendToUrl(url,data){
             responseData += chunk;
         });
         res.on('end', () => {
-            console.log('Response from server:', responseData);
+            // console.log('Response from server:', responseData);
         });
     }).on('error', (err) => {
         console.error(`Error in sending request: ${err.message}`);

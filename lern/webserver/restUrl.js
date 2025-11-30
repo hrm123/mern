@@ -46,7 +46,7 @@ const server = http.createServer((req, res) => {
             req.on('data', (data) => {
                 const newFriend = JSON.parse(data);
                 friends.push(newFriend);
-                console.log(`Added new friend: ${newFriend.name}`);
+                // console.log(`Added new friend: ${newFriend.name}`);
             });
             /* altenative way
             req.on('end', () => {
@@ -74,10 +74,10 @@ const server = http.createServer((req, res) => {
 const PORT = 3010;
 
 server.listen(PORT, () => {
-    console.log(`Server running at http://localhost:3010`);
+    // console.log(`Server running at http://localhost:3010`);
 }); // 127.0.0.1 by default
 
 // To run the server, use the command: node webserver/index.js
 // http://localhost:3010, http://localhost:3010/json - GET
-// fetch('http://localhost:3010/friends', { method: 'POST', body: JSON.stringify({ id:11, name: 'anonymous'}) }).then((respons) => respons.json()).then((newfriend) => console.log(newfriend))
+// fetch('http://localhost:3010/friends', { method: 'POST', body: JSON.stringify({ id:11, name: 'anonymous'}) }).then((respons) => respons.json()).then((newfriend) => // console.log(newfriend))
 

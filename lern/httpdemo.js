@@ -3,18 +3,18 @@ const fakeRequest = require('./request');
 const fakeResponse = require('./response');
 
 fakeReq = fakeRequest.send('Hello World! This is a test message.');
-console.log(faceResponse.receive(fakeReq)); 
+// console.log(faceResponse.receive(fakeReq)); 
 
 const req = http.request('https://www.google.com', (res) => {
     let data = '';
     // res is of type IncomingMessage which is extending EventEmitter class
     res.on('data', (chunk) => {
         data += chunk;
-        console.log(`${chunk}`); // chunk is Buffer type
+        // console.log(`${chunk}`); // chunk is Buffer type
     });
 
     res.on('end', () => { // no more data from request
-        console.log('no more data');
+        // console.log('no more data');
     });
 }).on('error', (err) => {
     console.error(`Error in accessing google website: ${err.message}`);
@@ -33,7 +33,7 @@ const PORT = 3000;
 const HOSTNAME = 'icecreamserver.local';
 
 server.listen(PORT, HOSTNAME, () => {
-    console.log(`Server running at http://${HOSTNAME}:${PORT}/`);
+    // console.log(`Server running at http://${HOSTNAME}:${PORT}/`);
 }).on('error', (err) => {
     console.error(`Error in starting server: ${err.message}`);
 });

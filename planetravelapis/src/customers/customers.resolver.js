@@ -6,10 +6,10 @@ module.exports = {
     Query: {
         orders: () => {
             if(isProduction){
-                console.log('--------------- Fetching customers --------------- ');
+                // console.log('--------------- Fetching customers --------------- ');
                 return customersModel.getAllCustomers();
             } else {
-                console.log('--------------- Fetching customers in TEST mode --------------- ');
+                // console.log('--------------- Fetching customers in TEST mode --------------- ');
                 return customersModel.getAllCustomers(true);
             }
         },

@@ -28,7 +28,7 @@ function postFriend(req, res){
     }
     const newFrnd = { id: model.length, name: req.body.name };
     model.push(newFrnd);
-    console.log(`Added new friend: ${friendName}`);
+    // console.log(`Added new friend: ${friendName}`);
     res.status(201).json(newFrnd); // 201 Created
 }
 

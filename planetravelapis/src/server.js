@@ -17,7 +17,7 @@ require('dotenv').config();
 const productsModel = require('./products/products.model');
 const ordersModel = require('./orders/orders.model');
 const customersModel = require('./customers/customers.model');
-
+const reviewsModel = require('./reviews/reviews.model');
 
 
 const AUTH_OPTIONS =
@@ -28,7 +28,7 @@ const AUTH_OPTIONS =
 }
 
 function verifyCallback(acccessToken, refreshToken, profile, done) {
-	console.log(`Google profile:${profile}`);
+	// console.log(`Google profile:${profile}`);
 	done(null, profile); //passport now knows this user is now signed in - accessToken will get the user password for the password based authentication.. where you need to verify the password (?)
 }
 
@@ -39,12 +39,12 @@ const google_auth_strategy = new Strategy(
 )
 
 passport.serializeUser((user, done) => { // called when user session state is being saved to cookie to be sent back to the browser.. gets the 'google' profile object
-	console.log(`serializeUser called with ${user}`);
+	// console.log(`serializeUser called with ${user}`);
 	done(null, user.id); // first argument is errors, if any. second argument is the result
 })
 
 passport.deserializeUser((id, done) => { // when cookie with session state is sent from web browser
-	console.log(`deserializeUser called with ${id}`);
+	// console.log(`deserializeUser called with ${id}`);
 	// User.findById(id).then(user => {
 	// done(null,user); // first argument is errors, if any. second argument is the value as exists in the cookie. The same will be set to req.session
 	// })
@@ -93,7 +93,8 @@ server.start().then(() => {
 				rootValue: {
 					products: productsModel.getAllProducts(true),
 					orders: ordersModel.getAllOrders(true),
-					customers: customersModel.getAllCustomers(true)
+					customers: customersModel.getAllCustomers(true),
+					reviews: reviewsModel.getAllReviews(true),
 				}
 			};
 		},
@@ -137,7 +138,7 @@ app.use((req, res, next) => {
 //to authenticate only certain endpoints, we add middleware to only those endpoints
 
 function checkLoggedIn(req, res, next) {
-	console.log('current user is:', req.user); // we are just storing google user profile ID here ti minimize cookie size
+	// console.log('current user is:', req.user); // we are just storing google user profile ID here ti minimize cookie size
 	const isLoggedIn = req.user;
 	if (!isLoggedIn) {
 		return res.status(401).json({
@@ -157,7 +158,7 @@ app.get('/auth/google/callback',
 	}),
 	(req, res) => {
 		//also could res.redirect instead of giving the failureRedirect and sucessRedirect property
-		console.log('Google called us back')
+		// console.log('Google called us back')
 	});
 
 // Serve static files from the 'public' directory
@@ -195,7 +196,7 @@ const PORT = process.env.PORT || 8000;
 // Export app for testing. Only listen when run directly.
 if (require.main === module) {
 	app.listen(PORT, () => {
-		console.log(`Server is running on port ${PORT}`);
+		// console.log(`Server is running on port ${PORT}`);
 	});
 }
 

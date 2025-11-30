@@ -39,7 +39,7 @@ const server = http.createServer((req, res) => {
 const PORT = 3010;
 
 server.listen(PORT, () => {
-    console.log(`Server running at http://localhost:3010`);
+    // console.log(`Server running at http://localhost:3010`);
 }); // 127.0.0.1 by default
 
 // To run the server, use the command: node webserver/index.js

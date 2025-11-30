@@ -4,7 +4,7 @@
 time_to_wait_before_executing = 1000; // 1 seconds
 
 setTimeout(() => {
-    console.log("🐰 finishes");
+    // console.log("🐰 finishes");
 }, time_to_wait_before_executing);
 
-console.log("🐢finishes");
+// console.log("🐢finishes");
