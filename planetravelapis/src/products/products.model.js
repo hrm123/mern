@@ -14,11 +14,21 @@ const products = [
 		
 function getAllProducts(test) {
 	if(test) {
+		console.log('Getting all products - test mode');
 		return products;
 	}
-	return products; // TODO - fetch from actual databse in real scenario
+	return null; // TODO - fetch from actual databse in real scenario
+}
+
+function getProductsByPrice(min,max,test=false) {
+	if(test) {
+		console.log('Getting products by price range - test mode');
+		return products.filter(product => product.price >= min && product.price <= max);;
+	}
+	return null; // TODO - fetch from actual databse in real scenario
 }
 		
 module.exports = {
-	getAllProducts
+	getAllProducts,
+	getProductsByPrice
 }

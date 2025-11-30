@@ -1,10 +1,17 @@
 const customersModel = require('./customers.model');
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 module.exports = {
     Query: {
         orders: () => {
-            console.log('--------------- Fetching customers --------------- ');
-            return customersModel.getAllCustomers();
+            if(isProduction){
+                console.log('--------------- Fetching customers --------------- ');
+                return customersModel.getAllCustomers();
+            } else {
+                console.log('--------------- Fetching customers in TEST mode --------------- ');
+                return customersModel.getAllCustomers(true);
+            }
         },
     }
 }

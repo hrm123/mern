@@ -85,9 +85,36 @@ const query2Response = `
   }
 }
 `;
+
+const query3 = `
+{
+    productsByPrice(minPrice: 10, maxPrice: 50){
+      id,
+      description
+    }
+}
+`;
+
+const query3Response = `
+{
+  "data": {
+    "productsByPrice": [
+      {
+        "id": "2",
+        "description": "Blue Jean"
+      }
+    ]
+  }
+}
+`;
+
+
+
 module.exports = {
   query1,
   query1Result,
   query2,
-  query2Response
+  query2Response,
+  query3,
+  query3Response
 };

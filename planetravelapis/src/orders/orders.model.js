@@ -25,9 +25,10 @@ const orders = [
 
 function getAllOrders(test) {
 	if(test) {
+		console.log('Getting all orders - test mode');
 		return orders;
 	}
-	return orders; // TODO - fetch from actual databse in real scenario
+	return null; // TODO - fetch from actual databse in real scenario
 }
 
 module.exports = {

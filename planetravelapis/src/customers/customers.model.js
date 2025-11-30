@@ -24,9 +24,10 @@ const customers = [
 
 function getAllCustomers(test) {
 	if(test) {
+		console.log('Getting all customers - test mode');
 		return customers;
 	}
-	return customers; // eftch from database etc in real scenario
+	return null; // eftch from database etc in real scenario
 }
 module.exports = {
 	getAllCustomers
