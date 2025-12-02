@@ -82,6 +82,8 @@ if (process.env.NODE_ENV === 'production') {
 	}));
 }
 
+
+// make Apollo server respond to /graphql endpoint
 const server = new ApolloServer({
 	schema: graphqlDetails.schema
 });

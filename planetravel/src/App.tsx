@@ -6,6 +6,9 @@ import { store } from './store/store';
 import Navbar from './components/Navbar';
 import LaunchesPage from './features/launches/LaunchesPage';
 import ReservationsPage from './features/reservations/ReservationsPage';
+import ProductListPage from './features/storefront/ProductListPage';
+import RegistrationPage from './features/storefront/RegistrationPage';
+import OrderModal from './features/storefront/OrderModal';
 import { setTheme } from './features/theme/themeSlice';
 import './i18n/i18n';
 import './App.css';
@@ -22,6 +25,9 @@ function App() {
               <Route path="/" element={<LaunchesPage />} />
               <Route path="/launches" element={<LaunchesPage />} />
               <Route path="/reservations" element={<ReservationsPage />} />
+              <Route path="/products" element={<ProductListPage />} />
+              <Route path="/register" element={<RegistrationPage />} />
+              <Route path="/order/:id" element={<OrderModal />} />
             </Routes>
           </main>
         </div>

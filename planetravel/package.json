@@ -16,10 +16,12 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@apollo/client": "^4.0.9",
     "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
     "@reduxjs/toolkit": "^2.9.2",
     "@types/uuid": "^10.0.0",
+    "graphql": "^16.12.0",
     "i18next": "^25.6.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
