@@ -5,7 +5,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 module.exports = {
     Query: {
         orders: () => {
-            if(isProduction){
+            if (isProduction) {
                 // console.log('--------------- Fetching orders --------------- ');
                 return ordersModel.getAllOrders();
             } else {
@@ -13,5 +13,10 @@ module.exports = {
                 return ordersModel.getAllOrders(true);
             }
         },
+    },
+    Mutation: {
+        createOrder: (_, { productId, quantity }) => {
+            return ordersModel.addOrder(productId, quantity);
+        }
     }
 }

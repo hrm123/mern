@@ -13,3 +13,7 @@ type OrderItem{
     product: Product!
     quantity: Int!
 }
+
+type Mutation {
+    createOrder(productId: ID!, quantity: Int!): Order
+}

@@ -9,3 +9,7 @@ type Customer{
     email: String!
     orders: [Order]
 }
+
+type Mutation {
+    registerCustomer(name: String!, email: String!, password: String!): Customer
+}

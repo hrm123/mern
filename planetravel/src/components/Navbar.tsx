@@ -30,7 +30,16 @@ const Navbar = () => {
         <div className="flex-none gap-4">
           <Link to="/launches" className="btn btn-ghost">{t('navbar.launches')}</Link>
           <Link to="/reservations" className="btn btn-ghost">{t('navbar.reservations')}</Link>
-          
+
+          {/* Storefront Dropdown */}
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost">Storefront</label>
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+              <li><Link to="/products">Products</Link></li>
+              <li><Link to="/register">Registration</Link></li>
+            </ul>
+          </div>
+
           {/* Theme Toggle */}
           <ThemeToggle />
 
