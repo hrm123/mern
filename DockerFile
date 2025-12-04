@@ -1,0 +1,32 @@
+FROM node:lts-alpine
+
+WORKDIR /app
+
+# Copy package.json files
+COPY package*.json ./
+COPY planetravel/package*.json ./planetravel/
+COPY planetravelapis/package*.json ./planetravelapis/
+
+# Install dependencies
+RUN npm run install-client --prefix ./
+RUN npm run install-server --prefix ./
+
+# Copy source code
+COPY planetravel/ ./planetravel/
+COPY planetravelapis/ ./planetravelapis/
+
+# Build frontend
+RUN npm run buildv --prefix planetravel
+
+# Create public directory in backend and copy build artifacts
+RUN mkdir -p planetravelapis/public
+RUN cp -r planetravel/dist/* planetravelapis/public/
+
+# Set user
+USER node
+
+# Expose port
+EXPOSE 8000
+
+# Start backend server
+CMD ["npm", "start", "--prefix", "planetravelapis"]

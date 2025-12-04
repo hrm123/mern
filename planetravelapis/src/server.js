@@ -164,7 +164,7 @@ app.get('/auth/google/callback',
 	});
 
 // Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 //logout end point for all providers
 app.get('/auth/logout', (req, res) => {
@@ -173,7 +173,11 @@ app.get('/auth/logout', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname, "public", 'index.html'));
+	res.sendFile(path.join(__dirname, '..', "public", 'index.html'));
+});
+
+app.get('/*', (req, res) => {
+	res.sendFile(path.join(__dirname, '..', "public", 'index.html'));
 });
 
 app.get('/failure', (req, res) => {
