@@ -1,0 +1,18 @@
+
+type Query {
+	launches : [ Launch ],
+	launchesByProductID(pid: ID!): [Launch]
+}
+
+type Mutation {
+	addLaunch(note: String!, pid: ID!): Launch
+}
+
+type Launch{
+	id: ID!
+	launchDate: String!
+	flightNumber: Int!
+	planetName: String!
+}
+	
+

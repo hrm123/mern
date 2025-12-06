@@ -176,10 +176,6 @@ app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, '..', "public", 'index.html'));
 });
 
-app.get('/*', (req, res) => {
-	res.sendFile(path.join(__dirname, '..', "public", 'index.html'));
-});
-
 app.get('/failure', (req, res) => {
 	res.send('failed to sign on')
 });
@@ -196,6 +192,13 @@ app.get('/secret', checkLoggedIn, (req, res) => {
 });
 
 
+
+app.get('/*', (req, res, next) => {
+	if (req.path.startsWith('/graphql')) {
+		return next();
+	}
+	res.sendFile(path.join(__dirname, '..', "public", 'index.html'));
+});
 
 const PORT = process.env.PORT || 8000;
 

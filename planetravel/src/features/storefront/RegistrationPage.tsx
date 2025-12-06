@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { gql } from '@apollo/client';
-import { useMutation } from '@apollo/client/react';
+// import { gql } from '@apollo/client';
+// import { useMutation } from '@apollo/client/react';
 
 const RegistrationPage = () => {
     const [formData, setFormData] = useState({

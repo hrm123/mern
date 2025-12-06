@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "buildv": "tsc -b && vite build",
-    "preview": "vite preview",
-    "testv": "vitest run",
+    "buildv": "tsc -b && npx vite build",
+    "preview": "npx vite preview",
+    "testv": "npx vitest run",
     "testvwatch": "vitest",
     "start": "vite",
     "lint": "eslint .",
@@ -29,13 +29,14 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.9.5",
     "redux-persist": "^6.0.0",
-    "uuid": "^13.0.0"
+    "uuid": "^13.0.0",
+    "vite": "^7.1.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
-    "@types/node": "^24.9.2",
+    "@types/node": "^24.10.1",
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.4",
@@ -50,7 +51,6 @@
     "tailwindcss": "^3.3.3",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.45.0",
-    "vite": "^7.1.7",
     "vitest": "^4.0.13"
   }
 }

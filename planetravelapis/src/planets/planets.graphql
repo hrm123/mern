@@ -1,0 +1,15 @@
+
+type Query {
+	planets : [ Planet ],
+	planetsByProductID(pid: ID!): [Planet]
+}
+
+type Mutation {
+	addPlanet(name: String!): Planet
+}
+
+type Planet{
+	name: String!
+}
+	
+

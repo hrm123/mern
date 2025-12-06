@@ -2,7 +2,7 @@ FROM node:lts-alpine
 
 WORKDIR /app
 
-# Copy package.json files
+# Copy package.json & package-lock.json files. sometime spackage-lock.json has issues when docker is running different version of different OS than where package-lock.json was created
 COPY package*.json ./
 COPY planetravel/package*.json ./planetravel/
 COPY planetravelapis/package*.json ./planetravelapis/
