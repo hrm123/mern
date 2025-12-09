@@ -6,13 +6,33 @@ import { addLaunch } from './launchesSlice';
 import type { Launch } from './launchesSlice';
 import { v4 as uuidv4 } from 'uuid';
 
+import { useQuery, gql } from '@apollo/client';
 
-const LaunchesPage = () => {
+const GET_LAUNCHES = gql`
+  query GetLaunches {
+    launches {
+      id
+      planet
+      date
+      availableSeats
+      price
+    }
+  }
+`;
+
+const LaunchesPage = (props: any) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const launches = useSelector((state: RootState) => state.launches.launches);
-  const planets = useSelector((state: RootState) => state.planets?.planets ?? ['Planet1', 'Planet2', 'Planet3']);
-
+  // const planets = useSelector((state: RootState) => state.planets?.planets ?? ['Planet1', 'Planet2', 'Planet3']);
+  let planets: string[] = [];
+  const { loading, error, data } = useQuery(GET_LAUNCHES);
+  if (loading) return <p>Loading launches...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  data?.launches.forEach((launch: Launch) => {
+    planets.push(launch.planet);
+    dispatch(addLaunch(launch));
+  });
   const [formData, setFormData] = useState({
     planet: planets[0] ?? 'Planet1',
     date: '',
@@ -35,10 +55,13 @@ const LaunchesPage = () => {
     });
   };
 
+
+  console.log('props', props)
+
   return (
     <div className="max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-8">{t('launches.title')}</h1>
-      
+
       {/* Create Launch Form */}
       <div className="card bg-base-200 shadow-xl mb-8">
         <div className="card-body">

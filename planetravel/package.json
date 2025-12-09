@@ -11,12 +11,12 @@
     "testvwatch": "vitest",
     "start": "vite",
     "lint": "eslint .",
-    "build": "BUILD_PATH=../server/public react-scripts build",
+    "build": "tsc -b && vite build",
     "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@apollo/client": "^4.0.9",
+    "@apollo/client": "^3.11.0",
     "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
     "@reduxjs/toolkit": "^2.9.2",

@@ -8,6 +8,7 @@ import client from './apolloClient'
 import './index.css'
 import App from './App'
 
+console.log('Main.tsx executing...');
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>

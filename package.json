@@ -7,7 +7,7 @@
         "install-server": "npm install --prefix planetravelapis",
         "install-client": "npm install --prefix planetravel",
         "install": "npm run install-server && npm run install-client",
-        "server": "npm run watch --prefix planetravelapis",
+        "server": "npm run build --prefix planetravel && npm run watch --prefix planetravelapis",
         "client": "npm start --prefix planetravel",
         "watch": "npm run server & npm run client",
         "watchwin": "start cmd /k \"npm run server\" && npm run client",

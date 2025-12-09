@@ -9,6 +9,10 @@ export default defineConfig({
     port: 8888,
     strictPort: true,
   },
+  build: {
+    outDir: '../planetravelapis/public',
+    emptyOutDir: true,
+  },
   test: {
     environment: 'jsdom', // Use 'jsdom' for browser environments, 'node' for Node.js
     globals: true, // Allows using `expect`, `describe`, `it` globally without imports
